@@ -96,7 +96,7 @@ app.get("/api/users/:_id/logs", async function (req, res) {
             counter++; //increment after introducing an exercise in the result (jsonObj.log.push)
           }
         }
-        jsonObj.count = counter;
+        jsonObj.count = Number(counter);
         res.json(jsonObj);
       }
     }
@@ -146,7 +146,7 @@ app.post("/api/users/:_id/exercises", async function (req, res) {
     User.findByIdAndUpdate(
       idFound._id,
       {
-        count: idFound.log.length,
+        count: Number(idFound.log.length),
         log: idFound.log,
       },
       function (err, user) {
