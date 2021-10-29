@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
     {
       description: { type: String, required: true },
       duration: { type: Number, required: true },
-      date: { type: String, default: new Date().toDateString() },
+      date: { type: Date, default: Date.now() },
     },
   ],
 });
@@ -74,7 +74,7 @@ app.get("/api/users/:_id/logs", async function (req, res) {
           jsonObj.log.push({
             description: user.log[i].description,
             duration: user.log[i].duration,
-            date: user.log[i].date,
+            date: user.log[i].date.toDateString(),
           });
         }
 
@@ -114,7 +114,7 @@ app.post("/api/users/:_id/exercises", async function (req, res) {
       idFound.log.push({
         description: req.body.description,
         duration: req.body.duration,
-        date: new Date(req.body.date).toDateString(),
+        date: req.body.date,
       });
     } else {
       idFound.log.push({
