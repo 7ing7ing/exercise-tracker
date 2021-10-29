@@ -100,7 +100,7 @@ app.post("/api/users", (req, res) => {
 
   res.json({
     username: req.body.username,
-    _id: userId,
+    //_id: userId,
   });
 });
 
