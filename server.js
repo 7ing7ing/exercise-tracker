@@ -90,7 +90,7 @@ app.get("/api/users/:_id/logs", async function (req, res) {
             jsonObj.log.push({
               //exercises are introduced one by one inside the for
               description: user.log[i].description,
-              duration: user.log[i].duration,
+              duration: Number(user.log[i].duration),
               date: new Date(user.log[i].date).toDateString(),
             });
             counter++; //increment after introducing an exercise in the result (jsonObj.log.push)
@@ -132,13 +132,13 @@ app.post("/api/users/:_id/exercises", async function (req, res) {
     if (req.body.date !== "") {
       idFound.log.push({
         description: req.body.description,
-        duration: req.body.duration,
+        duration: Number(req.body.duration),
         date: new Date(req.body.date).toDateString(),
       });
     } else {
       idFound.log.push({
         description: req.body.description,
-        duration: req.body.duration,
+        duration: Number(req.body.duration),
       });
     }
 
@@ -157,7 +157,7 @@ app.post("/api/users/:_id/exercises", async function (req, res) {
           res.json({
             username: idFound.username,
             description: req.body.description,
-            duration: parseInt(req.body.duration),
+            duration: Number(req.body.duration),
             _id: idFound._id,
             date:
               req.body.date !== ""
