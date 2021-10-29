@@ -64,9 +64,9 @@ app.get("/api/users/:_id/logs", async function (req, res) {
         console.log(err);
       } else {
         var jsonObj = {
-          _id: user._id,
           username: user.username,
           count: user.count,
+          _id: user._id,
           log: [],
         };
 
@@ -154,14 +154,14 @@ app.post("/api/users/:_id/exercises", async function (req, res) {
         } else {
           console.log("User activity has been updated.");
           res.json({
-            _id: idFound._id,
             username: idFound.username,
+            description: req.body.description,
+            duration: parseInt(req.body.duration),
             date:
               req.body.date !== ""
                 ? new Date(req.body.date).toDateString()
                 : new Date().toDateString(),
-            duration: parseInt(req.body.duration),
-            description: req.body.description,
+            _id: idFound._id,
           });
         }
       }
