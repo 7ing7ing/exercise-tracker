@@ -139,7 +139,9 @@ app.post("/api/users/:_id/exercises", async function (req, res) {
             _id: idFound._id,
             username: idFound.username,
             date:
-              req.body.date !== "" ? req.body.date : new Date().toDateString(),
+              req.body.date !== ""
+                ? new Date(req.body.date).toDateString()
+                : new Date().toDateString(),
             duration: parseInt(req.body.duration),
             description: req.body.description,
           });
