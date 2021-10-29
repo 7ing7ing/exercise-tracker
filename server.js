@@ -108,21 +108,21 @@ app.post("/api/users/:_id/exercises", async function (req, res) {
   let idFound = await User.findOne({
     _id: req.body[":_id"],
   });
-  //Push new data into the array
-  if (req.body.date !== "") {
-    idFound.log.push({
-      description: req.body.description,
-      duration: req.body.duration,
-      date: req.body.date,
-    });
-  } else {
-    idFound.log.push({
-      description: req.body.description,
-      duration: req.body.duration,
-    });
-  }
-
   if (idFound) {
+    //Push new data into the array
+    if (req.body.date !== "") {
+      idFound.log.push({
+        description: req.body.description,
+        duration: req.body.duration,
+        date: req.body.date,
+      });
+    } else {
+      idFound.log.push({
+        description: req.body.description,
+        duration: req.body.duration,
+      });
+    }
+
     //Update the array (this was pushed in the code above)
     User.findByIdAndUpdate(
       idFound._id,
