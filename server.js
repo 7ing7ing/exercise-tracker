@@ -4,7 +4,7 @@ const app = express();
 const cors = require("cors");
 const mongodb = require("mongodb");
 const mongoose = require("mongoose");
-const uniqid = require("uniqid");
+const ObjectID = require("bson-objectid");
 
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -85,7 +85,7 @@ app.get("/api/users/:_id/logs", async function (req, res) {
 });
 
 app.post("/api/users", (req, res) => {
-  const userId = uniqid();
+  const userId = ObjectID();
 
   const newUser = new User({
     username: req.body.username,
