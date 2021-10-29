@@ -86,16 +86,17 @@ app.get("/api/users/:_id/logs", async function (req, res) {
               (!req.query.to && req.query.from && actualDate >= from) ||
               (!req.query.to && !req.query.from)) &&
             ((req.query.limit && counter < limit) || !req.query.limit)
-          )
+          ) {
             jsonObj.log.push({
               //exercises are introduced one by one inside the for
               description: user.log[i].description,
               duration: user.log[i].duration,
-              date: user.log[i].date.toDateString(),
+              date: new Date(user.log[i].date).toDateString(),
             });
-          counter++; //increment after introducing an exercise in the result (jsonObj.log.push)
+            counter++; //increment after introducing an exercise in the result (jsonObj.log.push)
+          }
         }
-
+        jsonObj.count = counter;
         res.json(jsonObj);
       }
     }
