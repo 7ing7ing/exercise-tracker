@@ -89,7 +89,7 @@ app.post("/api/users", (req, res) => {
 
   const newUser = new User({
     username: req.body.username,
-    //_id: userId,
+    _id: userId,
     count: 0,
   });
 
@@ -100,7 +100,7 @@ app.post("/api/users", (req, res) => {
 
   res.json({
     username: req.body.username,
-    //_id: userId,
+    _id: userId,
   });
 });
 
