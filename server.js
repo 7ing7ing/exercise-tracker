@@ -148,6 +148,10 @@ app.post("/api/users/:_id/exercises", async function (req, res) {
         }
       }
     );
+  } else {
+    res.json({
+      error: "ID not found",
+    });
   }
 });
 
