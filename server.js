@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
     {
       description: { type: String, required: true },
       duration: { type: Number, required: true },
-      date: { type: Date, default: new Date().toDateString() },
+      date: { type: String, default: new Date().toDateString() },
     },
   ],
 });
@@ -157,11 +157,11 @@ app.post("/api/users/:_id/exercises", async function (req, res) {
             username: idFound.username,
             description: req.body.description,
             duration: parseInt(req.body.duration),
+            _id: idFound._id,
             date:
               req.body.date !== ""
                 ? new Date(req.body.date).toDateString()
                 : new Date().toDateString(),
-            _id: idFound._id,
           });
         }
       }
