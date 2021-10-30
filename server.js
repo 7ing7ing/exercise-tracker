@@ -127,6 +127,7 @@ app.post("/api/users/:_id/exercises", async function (req, res) {
   let idFound = await User.findOne({
     _id: req.params._id,
   });
+  console.log(Date.parse("asdasd"));
 
   if (idFound) {
     //Push new data into the array
@@ -137,11 +138,17 @@ app.post("/api/users/:_id/exercises", async function (req, res) {
         date: new Date().toDateString(),
       });
     } else {
-      idFound.log.push({
-        description: req.body.description,
-        duration: Number(req.body.duration),
-        date: new Date(req.body.date).toDateString(),
-      });
+      if (isNaN(Date.parse(req.body.date))) {
+        return res.json({
+          error: "Invalid date",
+        });
+      } else {
+        idFound.log.push({
+          description: req.body.description,
+          duration: Number(req.body.duration),
+          date: new Date(req.body.date).toDateString(),
+        });
+      }
     }
 
     //Update the array (this was pushed in the code above)
