@@ -125,7 +125,7 @@ app.post("/api/users", (req, res) => {
 
 app.post("/api/users/:_id/exercises", async function (req, res) {
   let idFound = await User.findOne({
-    _id: req.params[":_id"],
+    _id: req.params._id,
   });
   if (idFound) {
     //Push new data into the array
