@@ -127,19 +127,20 @@ app.post("/api/users/:_id/exercises", async function (req, res) {
   let idFound = await User.findOne({
     _id: req.params._id,
   });
+
   if (idFound) {
     //Push new data into the array
-    if (req.body.date !== "") {
+    if (req.body.date === "" || !req.body.date) {
       idFound.log.push({
         description: req.body.description,
         duration: Number(req.body.duration),
-        date: new Date(req.body.date).toDateString(),
+        date: new Date().toDateString(),
       });
     } else {
       idFound.log.push({
         description: req.body.description,
         duration: Number(req.body.duration),
-        date: new Date().toDateString(),
+        date: new Date(req.body.date).toDateString(),
       });
     }
 
@@ -161,9 +162,9 @@ app.post("/api/users/:_id/exercises", async function (req, res) {
             duration: Number(req.body.duration),
             _id: idFound._id,
             date:
-              req.body.date !== ""
-                ? new Date(req.body.date).toDateString()
-                : new Date().toDateString(),
+              req.body.date === "" || !req.body.date
+                ? new Date().toDateString()
+                : new Date(req.body.date).toDateString(),
           });
         }
       }
