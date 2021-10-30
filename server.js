@@ -139,6 +139,7 @@ app.post("/api/users/:_id/exercises", async function (req, res) {
       idFound.log.push({
         description: req.body.description,
         duration: Number(req.body.duration),
+        date: new Date().toDateString(),
       });
     }
 
