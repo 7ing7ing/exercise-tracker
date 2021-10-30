@@ -91,7 +91,7 @@ app.get("/api/users/:_id/logs", async function (req, res) {
               //exercises are introduced one by one inside the for
               description: user.log[i].description,
               duration: Number(user.log[i].duration),
-              date: new Date(user.log[i].date).toDateString(),
+              date: user.log[i].date,
             });
             counter++; //increment after introducing an exercise in the result (jsonObj.log.push)
           }
