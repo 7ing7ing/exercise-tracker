@@ -5,6 +5,7 @@ const cors = require("cors");
 const mongodb = require("mongodb");
 const mongoose = require("mongoose");
 const ObjectID = require("bson-objectid");
+const path = require('path');
 
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -15,7 +16,7 @@ mongoose
   });
 
 app.use(cors());
-app.use(express.static("public"));
+app.use("/public", express.static(path.join(__dirname, "..","public")));
 //Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
 app.use(
   express.urlencoded({
@@ -39,7 +40,7 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model("User", userSchema);
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/views/index.html");
+  res.sendFile(path.join(__dirname, "..", "views", "index.html"));
 });
 
 app.get("/api/users", async function (req, res) {
@@ -186,3 +187,5 @@ app.post("/api/users/:_id/exercises", async function (req, res) {
 const listener = app.listen(process.env.PORT || 3000, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
+
+module.exports = app;

@@ -11,4 +11,4 @@
 
 :link:Link:
 
-- https://exercise-tracker-z6gb.onrender.com
+- https://exercise-tracker-topaz-sigma.vercel.app/
